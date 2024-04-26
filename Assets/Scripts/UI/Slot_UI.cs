@@ -1,0 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class Slot_UI : MonoBehaviour
+{
+    [SerializeField] public Image itemIcon;
+    [SerializeField] public TextMeshProUGUI quantityText;
+
+    public void SetItem(Inventory.Slot slot)
+    {
+        if (slot != null)
+        {
+            itemIcon.sprite = slot.icon;
+            itemIcon.color = Color.white;
+            quantityText.text = slot.count.ToString();
+        }
+    }
+
+    public void SetEmpty()
+    {
+        itemIcon.sprite = null;
+        itemIcon.color = Color.clear;
+        quantityText.text = "";
+    }
+}

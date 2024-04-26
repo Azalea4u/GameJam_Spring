@@ -7,15 +7,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] Animator animator;
 
+    private Vector3 direction;
+
     private void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Vector3 direction = new Vector3(horizontal, vertical, 0);
+        direction = new Vector3(horizontal, vertical, 0);
 
         AnimateMovement(direction);
 
+    }
+
+    private void FixedUpdate()
+    {
+        // moves the player
         transform.position += direction * speed * Time.deltaTime;
     }
 
