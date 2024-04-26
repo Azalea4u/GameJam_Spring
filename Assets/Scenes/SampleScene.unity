@@ -1558,8 +1558,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f84c5c7b4f0e3408fa7abdf85922ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectableItems:
-  - {fileID: 3402454170306299400, guid: 410e16f3bd74ea540b66a7d00e4616b2, type: 3}
+  items:
+  - {fileID: 1367110483493695050, guid: 410e16f3bd74ea540b66a7d00e4616b2, type: 3}
 --- !u!114 &518398565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2577,11 +2577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe300d3d853ff741a9f8b9c202fbbe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!50 &1076986977 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 1953205915372367204, guid: 410e16f3bd74ea540b66a7d00e4616b2, type: 3}
-  m_PrefabInstance: {fileID: 1216063742440341688}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1124509711
 GameObject:
   m_ObjectHideFlags: 0
@@ -145937,7 +145932,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 299632532951592851, guid: 410e16f3bd74ea540b66a7d00e4616b2, type: 3}
       propertyPath: m_Name
-      value: Collectable
+      value: WheatSeeds_Collectable
       objectReference: {fileID: 0}
     - target: {fileID: 1392993584722922714, guid: 410e16f3bd74ea540b66a7d00e4616b2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -145979,14 +145974,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3402454170306299400, guid: 410e16f3bd74ea540b66a7d00e4616b2, type: 3}
-      propertyPath: icon
-      value: 
-      objectReference: {fileID: 810662808, guid: 2bf3970fdb8a3804f9dd20db59f69085, type: 3}
-    - target: {fileID: 3402454170306299400, guid: 410e16f3bd74ea540b66a7d00e4616b2, type: 3}
-      propertyPath: rb2D
-      value: 
-      objectReference: {fileID: 1076986977}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

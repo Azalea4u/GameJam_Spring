@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1392993584722922714}
-  - component: {fileID: 3402454170306299400}
+  - component: {fileID: 1367110483493695050}
+  - component: {fileID: 5019634506826887115}
   - component: {fileID: 5550114641481587386}
   - component: {fileID: 4900854915931823130}
   - component: {fileID: 1953205915372367204}
   m_Layer: 0
-  m_Name: Collectable
+  m_Name: WheatSeeds_Collectable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +36,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3402454170306299400
+--- !u!114 &1367110483493695050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299632532951592851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ffb9571c6a99f45859d88d4b7c2067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 0f1db1a988c274745b2ac45c0520e292, type: 2}
+  rb2D: {fileID: 0}
+--- !u!114 &5019634506826887115
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,9 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c239b7d09b6c98140b1f0dc773d26a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  icon: {fileID: 0}
-  rb2D: {fileID: 0}
 --- !u!212 &5550114641481587386
 SpriteRenderer:
   m_ObjectHideFlags: 0

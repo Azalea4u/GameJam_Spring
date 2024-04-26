@@ -26,12 +26,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void DropItem(Collectable item)
+    public void DropItem(Item item)
     {
         Vector2 spawmLocation = transform.position;
         Vector2 spawnOffset = Random.insideUnitCircle * 1.25f;
 
-        Collectable droppedItem = Instantiate(item, spawmLocation + spawnOffset, Quaternion.identity);
+        Item droppedItem = Instantiate(item, spawmLocation + spawnOffset, Quaternion.identity);
 
         // Makes the dropped item slide
         droppedItem.rb2D.AddForce(spawnOffset * 0.2f, ForceMode2D.Impulse);
