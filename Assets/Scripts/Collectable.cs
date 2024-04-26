@@ -6,6 +6,12 @@ public class Collectable : MonoBehaviour
 {
     [SerializeField] public CollectableType type;
     [SerializeField] public Sprite icon;
+    [SerializeField] public Rigidbody2D rb2D;
+
+    private void Awake()
+    {
+        rb2D = GetComponent<Rigidbody2D>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,7 +19,7 @@ public class Collectable : MonoBehaviour
 
         if (player)
         {
-            player.inventory.AddItem(this);
+            player.inventory.Add(this);
 
             Destroy(this.gameObject);
         }

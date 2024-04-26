@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -39,6 +40,20 @@ public class Inventory
             this.icon = item.icon;
             count++;
         }
+
+        public void RemoveItem()
+        {
+            if (count > 0)
+            {
+                count--;
+
+                if (count == 0)
+                {
+                    type = CollectableType.NONE;
+                    icon = null;
+                }
+            }
+        }
     }
 
     public List<Slot> slots = new List<Slot>();
@@ -51,7 +66,7 @@ public class Inventory
         }
     }
 
-    public void AddItem(Collectable item)
+    public void Add(Collectable item)
     {
         // Check if we already have the item in our inventory
         foreach (Slot slot in slots)
@@ -73,5 +88,10 @@ public class Inventory
                 return;
             }
         }
+    }
+
+    public void Remove(int index)
+    {
+        slots[index].RemoveItem();
     }
 }

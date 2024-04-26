@@ -8,6 +8,11 @@ public class Inventory_UI : MonoBehaviour
     [SerializeField] Player player;
     [SerializeField] List<Slot_UI> slots = new List<Slot_UI>();
 
+    private void Start()
+    {
+        inventoryPanel.SetActive(false);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.E))
@@ -21,7 +26,7 @@ public class Inventory_UI : MonoBehaviour
         if (!inventoryPanel.activeSelf)
         {
             inventoryPanel.SetActive(true);
-            Setup();
+            Refresh();
         }
         else
         {
@@ -29,7 +34,7 @@ public class Inventory_UI : MonoBehaviour
         }
     }
 
-    private void Setup()
+    private void Refresh()
     {
         if (slots.Count == player.inventory.slots.Count)
         {
@@ -42,9 +47,23 @@ public class Inventory_UI : MonoBehaviour
                 else
                 {
                     slots[i].SetEmpty();
+
                 }
 
             }
+        }
+    }
+
+    public void Remove(int slotID)
+    {
+        Collectable itemToDrop = GameManager.instance.itemManager.GetItembyType(
+            player.inventory.slots[slotID].type);
+
+        if (itemToDrop != null)
+        {
+            player.DropItem(itemToDrop);
+            player.inventory.Remove(slotID);
+            Refresh();
         }
     }
 }
