@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Tilled_Dirt_61
+  m_Name: All Icons_40
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 282375859, guid: 3221f90b687f3a9418d7212d86603a8e, type: 3}
+  m_Sprite: {fileID: 1769635850, guid: 4078436f19f37704d93b83ae05ad44b6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
