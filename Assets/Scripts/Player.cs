@@ -16,11 +16,10 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             Vector3Int position = new Vector3Int((int)transform.position.x,
-                (int)transform.position.y, 0);
+                (int)transform.position.y - 1, 0);
 
             if (GameManager.instance.tileManager.IsInteractable(position)) 
             {
-                Debug.Log("Tile is interactable");
                 GameManager.instance.tileManager.SetInteracted(position);
             }
         }

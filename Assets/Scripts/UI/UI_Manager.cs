@@ -68,9 +68,9 @@ public class UI_Manager : MonoBehaviour
 
     public void RefreshAll()
     {
-        foreach (var item in inventoryUIByName.Values)
+        foreach (KeyValuePair<string, Inventory_UI> keyValuePair in inventoryUIByName)
         {
-            item.Refresh();
+            keyValuePair.Value.Refresh();
         }
     }
 

@@ -6,6 +6,8 @@ public class InventoryManager : MonoBehaviour
 {
     public Dictionary<string, Inventory> inventoryByName = new Dictionary<string, Inventory>();
 
+    public Inventory_UI inventoryUI;
+
     [Header("Backpack")]
     public int backpackSlotCount = 21;
     public Inventory backpack;
@@ -28,6 +30,7 @@ public class InventoryManager : MonoBehaviour
         if (inventoryByName.ContainsKey(inventoryName))
         {
             inventoryByName[inventoryName].Add(item);
+            inventoryUI.Refresh();
         }
     }
 

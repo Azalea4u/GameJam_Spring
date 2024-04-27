@@ -102,7 +102,8 @@ public class Inventory_UI : MonoBehaviour
 
         }
 
-        GameManager.instance.uiManager.RefreshAll();
+        Refresh();
+        //GameManager.instance.uiManager.RefreshAll();
     }
 
     private void MoveToMousePosition(GameObject toMove)
