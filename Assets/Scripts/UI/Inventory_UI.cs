@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Inventory_UI : MonoBehaviour
 {
@@ -18,7 +16,7 @@ public class Inventory_UI : MonoBehaviour
 
     private void Start()
     {
-        inventory = GameManager.instance.player.inventory.GetInventoryByName(inventoryName);
+        inventory = GameManager.instance.player.inventoryManager.GetInventoryByName(inventoryName);
         SetupSlots();
         Refresh();
     }
@@ -27,7 +25,7 @@ public class Inventory_UI : MonoBehaviour
     {
         if (slots.Count == inventory.slots.Count)
         {
-            for(int i = 0; i < slots.Count; i++)
+            for (int i = 0; i < slots.Count; i++)
             {
                 if (inventory.slots[i].itemName != "")
                 {
@@ -43,6 +41,7 @@ public class Inventory_UI : MonoBehaviour
         }
     }
 
+    /*
     public void Remove()
     {
         Item itemToDrop = GameManager.instance.itemManager.GetItemByName(
@@ -66,6 +65,7 @@ public class Inventory_UI : MonoBehaviour
 
         UI_Manager.draggedSlot = null;
     }
+    */
 
     public void Slot_BeginDrag(Slot_UI slot)
     {
@@ -103,7 +103,7 @@ public class Inventory_UI : MonoBehaviour
         }
 
         Refresh();
-        //GameManager.instance.uiManager.RefreshAll();
+        //GameManager.Instance.uiManager.RefreshAll();
     }
 
     private void MoveToMousePosition(GameObject toMove)
@@ -123,7 +123,7 @@ public class Inventory_UI : MonoBehaviour
     {
         int counter = 0;
 
-        foreach(Slot_UI slot in slots)
+        foreach (Slot_UI slot in slots)
         {
             slot.slotID = counter;
             counter++;

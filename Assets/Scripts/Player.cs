@@ -4,23 +4,67 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public InventoryManager inventory;
+    public InventoryManager inventoryManager;
+    private TileManager tileManager;
 
     private void Awake()
     {
-        inventory = GetComponent<InventoryManager>();
+        inventoryManager = GetComponent<InventoryManager>();
+    }
+
+    private void Start()
+    {
+        tileManager = GameManager.instance.tileManager;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
-            Vector3Int position = new Vector3Int((int)transform.position.x,
-                (int)transform.position.y - 1, 0);
-
-            if (GameManager.instance.tileManager.IsInteractable(position)) 
+            if (tileManager != null)
             {
-                GameManager.instance.tileManager.SetInteracted(position);
+                Vector3Int position = new Vector3Int((int)transform.position.x, (int)transform.position.y - 1, 0);
+
+                string tileName = tileManager.GetTileName(position);
+
+                if (!string.IsNullOrWhiteSpace(tileName))
+                {
+                    if (tileName.Contains("Interactable"))
+                    {
+                        if (inventoryManager.hotbar.selectedSlot.itemName == "Hoe" || inventoryManager.hotbar.selectedSlot.itemName == "WateringCan")
+                        {
+                            switch (inventoryManager.hotbar.selectedSlot.itemName)
+                            {
+                                case "Hoe":
+                                    tileManager.SetPlowed(position);
+                                    break;
+
+                                case "WateringCan":
+                                    tileManager.SetWatered(position);
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                        else if (inventoryManager.hotbar.selectedSlot.itemName.Contains("Seed"))
+                        {
+                            // get seed data from selected slot
+                            SeedData seedData = inventoryManager.hotbar.selectedSlot.seedData;
+
+                            if (tileName.Contains("Plow"))
+                                tileManager.PlantSeed(position, seedData);
+                            else
+                                Debug.Log("This tile has not been plowed up");
+
+                            Debug.Log("Planted Seed");
+                        }
+                        else
+                        {
+                            Debug.Log("Cannot interact with tile");
+                        }
+                    }
+                }
             }
         }
     }

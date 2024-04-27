@@ -16,7 +16,7 @@ public class Collectable : MonoBehaviour
 
             if (item != null)
             {
-                player.inventory.Add("Hotbar", item);
+                player.inventoryManager.Add("Hotbar", item);
                 
                 Destroy(this.gameObject);
             }

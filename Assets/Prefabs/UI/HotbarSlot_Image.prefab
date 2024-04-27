@@ -342,6 +342,11 @@ MonoBehaviour:
   slotID: 0
   inventory:
     slots: []
+    selectedSlot:
+      itemName: 
+      count: 0
+      MaxAllowed: 99
+      icon: {fileID: 0}
   itemIcon: {fileID: 7914905581873870709}
   quantityText: {fileID: 1727843059540140153}
   highlight: {fileID: 3190429467269702308}

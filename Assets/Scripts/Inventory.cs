@@ -77,9 +77,25 @@ public class Inventory
                 }
             }
         }
+
+        // get SeedData
+        public SeedData seedData
+        {
+            get
+            {
+                if (itemName.Contains("Seed"))
+                {
+                    SeedData seedData = new SeedData();
+                    seedData = (SeedData)GameManager.instance.itemManager.GetItemByName(itemName).data;
+                    return seedData;
+                }
+                return null;
+            }
+        }
     }
 
     public List<Slot> slots = new List<Slot>();
+    public Slot selectedSlot = null;
 
     public Inventory(int numSlots)
     {
@@ -91,7 +107,7 @@ public class Inventory
 
     public void Add(Item item)
     {
-        // Check if we already have the item in our inventory
+        // Check if we already have the item in our inventoryManager
         foreach (Slot slot in slots)
         {
             if (slot.itemName == item.data.itemName && slot.CanAddItem(item.data.itemName))
@@ -101,7 +117,7 @@ public class Inventory
             }
         }
 
-        // If we don't have the item in our inventory/or is full
+        // If we don't have the item in our inventoryManager/or is full
         // add it to the first empty slot
         foreach (Slot slot in slots)
         {
@@ -141,6 +157,14 @@ public class Inventory
                 toSlot.AddItem(fromSlot.itemName, fromSlot.icon, fromSlot.MaxAllowed);
                 fromSlot.RemoveItem(); 
             }
+        }
+    }
+
+    public void SelectSlot(int index)
+    {
+        if (slots != null && slots.Count > 0)
+        {
+            selectedSlot = slots[index];
         }
     }
 }
