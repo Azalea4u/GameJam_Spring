@@ -8,6 +8,7 @@ public class Slot_UI : MonoBehaviour
 {
     [SerializeField] public Image itemIcon;
     [SerializeField] public TextMeshProUGUI quantityText;
+    [SerializeField] private GameObject highlight;
 
     public void SetItem(Inventory.Slot slot)
     {
@@ -24,5 +25,10 @@ public class Slot_UI : MonoBehaviour
         itemIcon.sprite = null;
         itemIcon.color = Color.clear;
         quantityText.text = "";
+    }
+
+    public void SetHighlight(bool isSelected)
+    {
+        highlight.SetActive(isSelected);
     }
 }
