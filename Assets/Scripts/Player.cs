@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Inventory inventory;
+    public InventoryManager inventory;
 
     private void Awake()
     {
-        inventory = new Inventory(21);
+        inventory = GetComponent<InventoryManager>();
     }
 
     private void Update()
@@ -29,11 +29,19 @@ public class Player : MonoBehaviour
     public void DropItem(Item item)
     {
         Vector2 spawmLocation = transform.position;
-        Vector2 spawnOffset = Random.insideUnitCircle * 1.25f;
+        Vector2 spawnOffset = Random.insideUnitCircle * 1.5f;
 
         Item droppedItem = Instantiate(item, spawmLocation + spawnOffset, Quaternion.identity);
 
         // Makes the dropped item slide
         droppedItem.rb2D.AddForce(spawnOffset * 0.2f, ForceMode2D.Impulse);
+    }
+
+    public void DropItem(Item item, int numToDrop)
+    {
+        for (int i = 0; i < numToDrop; i++)
+        {
+            DropItem(item);
+        }
     }
 }
