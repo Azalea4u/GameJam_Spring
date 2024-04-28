@@ -18,6 +18,7 @@ public class Store_UI : MonoBehaviour
     private void Start()
     {
         inventory = GameManager.instance.player.inventoryManager.GetInventoryByName(inventoryName);
+        inventoryPanel.SetActive(false);
     }
 
     private void Update()
@@ -34,10 +35,14 @@ public class Store_UI : MonoBehaviour
         if (inventoryPanel.activeSelf)
         {
             inventoryPanel.SetActive(false);
+            // Exit the store when closing the inventory
+            GameManager.instance.ExitStore();
         }
         else
         {
             inventoryPanel.SetActive(true);
+            // Enter the store when opening the inventory
+            GameManager.instance.EnterStore();
         }
     }
 }

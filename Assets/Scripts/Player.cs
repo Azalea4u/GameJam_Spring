@@ -60,8 +60,12 @@ public class Player : MonoBehaviour
                         
                         if (inventoryManager.hotbar.selectedSlot.itemName == "Hoe")
                         {
-
-                            tileManager.SetPlowed(position);
+                            if (tileName.Contains("Seed"))
+                            {
+                                Debug.Log("This tile has already been plowed up");
+                            }
+                            else
+                                tileManager.SetPlowed(position);
                         }
                         else if (inventoryManager.hotbar.selectedSlot.itemName == "WateringCan")
                         {

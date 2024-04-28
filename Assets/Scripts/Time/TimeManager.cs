@@ -15,6 +15,8 @@ public class TimeManager : MonoBehaviour
     [Header("TimerBar")]
     [SerializeField] private TimerController timerController;
 
+    private bool isTimePaused = true;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -29,18 +31,30 @@ public class TimeManager : MonoBehaviour
 
     void Start()
     {
-       // timestamp = new GameTimestamp(1, 1, 1, 0);
+        // timestamp = new GameTimestamp(1, 1, 1, 0);
+        //StartCoroutine(TimeUpdate());
+        PauseTime();
+    }
+
+    public void StartTimer()
+    {
         StartCoroutine(TimeUpdate());
     }
 
-    IEnumerator TimeUpdate()
+    private IEnumerator TimeUpdate()
     {
         while (true)
         {
-            yield return new WaitForSeconds(1/timeScale);
-            Tick();
+            if (!isTimePaused)
+            {
+                yield return new WaitForSeconds(1 / timeScale);
+                Tick();
+            }
+            else
+            {
+                yield return null;
+            }
         }
-
     }
 
     private void Tick()
@@ -54,4 +68,15 @@ public class TimeManager : MonoBehaviour
         float fillAmount = 1f - (timestamp.hour - 1 + (float)DateTime.Now.Second / 60f) / 24f;
         timerController.UpdateTimerBar(fillAmount);
     }
+
+    public void PauseTime()
+    {
+        isTimePaused = true;
+    }
+
+    public void ResumeTime()
+    {
+        isTimePaused = false;
+    }
+
 }
