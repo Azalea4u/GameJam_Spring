@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public InventoryManager inventoryManager;
     private TileManager tileManager;
 
+
     private void Awake()
     {
         inventoryManager = GetComponent<InventoryManager>();
@@ -20,11 +21,12 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        Vector3Int position = new Vector3Int((int)transform.position.x, (int)transform.position.y - 1, 0);
+
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             if (tileManager != null)
             {
-                Vector3Int position = new Vector3Int((int)transform.position.x, (int)transform.position.y - 1, 0);
                 string tileName = tileManager.GetTileName(position);
 
                 if (!string.IsNullOrWhiteSpace(tileName))

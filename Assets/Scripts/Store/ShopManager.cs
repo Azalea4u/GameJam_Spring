@@ -15,6 +15,10 @@ public class ShopManager : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] public Button[] buttons;
 
+    [Header("Sell")]
+    [SerializeField] public Button SellButton;
+    [SerializeField] public Slot_UI sellSlot;
+
     // Items To Buy
     [Header("Items")]
     [SerializeField] public Item WheatSeeds;
@@ -24,6 +28,8 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        SelectSlot(sellSlot);
+
         coinsText.text = coins.ToString();
 
         // ID's
@@ -65,12 +71,57 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public Item SellItem()
+    public void SellItem()
     {
-        // get the item from the selected slot
+        if (GameManager.instance.player.inventoryManager.sellSlot.slots[0] != null)
+        {
+            // get the item from the slot[0]
+            Inventory.Slot slot = GameManager.instance.player.inventoryManager.sellSlot.slots[0];
+            if (slot.itemName.Contains("Tomato") || slot.itemName.Contains("Wheat"))
+            {
+                Item itemToSell = GameManager.instance.itemManager.GetItemByName(slot.itemName);
+                if (itemToSell != null)
+                {
+                    int sellPrice = itemToSell.SellPrice;
+                    coins += sellPrice * slot.count;
+                    slot.count = 0;
+                    if (slot.count == 0 )
+                    {
+                        slot.itemName = "";
+                        slot.icon = null;
+                    }
+                    coinsText.text = coins.ToString();
 
-        return null;
+                    // Clear the sell slot
+                   // sellSlot.SetEmpty();
+                    RefreshSellSlot();
+                }
+            }
+            else
+            {
+                Debug.Log("You can't sell this item");
+            }
+        }
+    }
 
+    public void RefreshSellSlot()
+    {
+        if (sellSlot != null)
+        {
+            if (sellSlot.inventory.selectedSlot.itemName != "")
+            {
+                sellSlot.SetItem(sellSlot.inventory.selectedSlot);
+            }
+            else
+            {
+                sellSlot.SetEmpty();
+            }
+        }
+    }
+
+    public void SelectSlot(Slot_UI slot)
+    {
+        GameManager.instance.player.inventoryManager.sellSlot.SelectSlot(slot.slotID);
     }
 
 }

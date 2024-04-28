@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Wheat Seeds
   icon: {fileID: 810662808, guid: 2bf3970fdb8a3804f9dd20db59f69085, type: 3}
+  sellPrice: 10
   daysToGrow: 4
-  cropToYield: {fileID: 1367110483493695050, guid: b827fe079ee22764c9dde939320b1be2, type: 3}
+  cropToYield: {fileID: 1367110483493695050, guid: 01894a24782d02a4d9668d461e96761f, type: 3}
   seedlingSprite: {fileID: 11400000, guid: 4b9453a616750bb40a0578d6ff95f3ed, type: 2}
   yieldAmount: 3
-  sellPrice: 10
   growthStageTiles:
   - {fileID: 11400000, guid: 4b9453a616750bb40a0578d6ff95f3ed, type: 2}
   - {fileID: 11400000, guid: f141acf8c1911124495fe67476ed3b4a, type: 2}

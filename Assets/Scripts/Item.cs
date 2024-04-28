@@ -8,6 +8,8 @@ public class Item : MonoBehaviour
     [SerializeField] public ItemData data;
     [HideInInspector] public Rigidbody2D rb2D;
 
+    public int SellPrice => data.sellPrice;
+
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();

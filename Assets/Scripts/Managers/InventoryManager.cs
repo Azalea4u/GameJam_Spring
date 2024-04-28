@@ -12,6 +12,10 @@ public class InventoryManager : MonoBehaviour
     //public int backpackSlotCount = 21;
     //public Inventory backpack;
 
+    [Header("SellSlot")]
+    public int sellSlotCount = 1;
+    public Inventory sellSlot;
+
     [Header("Hotbar")]
     public int hotbarSlotCount = 7;
     public Inventory hotbar;
@@ -20,6 +24,9 @@ public class InventoryManager : MonoBehaviour
     {
         //backpack = new Inventory(backpackSlotCount);
         //inventoryByName.Add("Backpack", backpack);
+
+        sellSlot = new Inventory(sellSlotCount);
+        inventoryByName.Add("SellSlot", sellSlot);
 
         hotbar = new Inventory(hotbarSlotCount);
         inventoryByName.Add("Hotbar", hotbar);
@@ -30,6 +37,15 @@ public class InventoryManager : MonoBehaviour
         if (inventoryByName.ContainsKey(inventoryName))
         {
             inventoryByName[inventoryName].Add(item);
+            inventoryUI.Refresh();
+        }
+    }
+
+    public void Remove(string inventoryName, int slotID, int quantity)
+    {
+        if (inventoryByName.ContainsKey(inventoryName))
+        {
+            inventoryByName[inventoryName].Remove(slotID, quantity);
             inventoryUI.Refresh();
         }
     }

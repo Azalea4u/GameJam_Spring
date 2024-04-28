@@ -91,8 +91,6 @@ public class TileManager : MonoBehaviour
 
         foreach (var entry in seededTiles)
         {
-            int daysLeft = entry.Value.daysToGrow;
-
             Vector3Int position = entry.Key;
             SeedData seedData = entry.Value;
 

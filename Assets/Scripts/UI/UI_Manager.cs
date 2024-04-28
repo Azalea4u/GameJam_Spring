@@ -11,10 +11,6 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] public List<Inventory_UI> inventoryUIs;
     [SerializeField] GameObject inventoryPanel;
 
-    public static Slot_UI draggedSlot;
-    public static Image draggedIcon;
-    public static bool dragSingle;
-
     private void Awake()
     {
         Initialize();
@@ -23,55 +19,6 @@ public class UI_Manager : MonoBehaviour
     private void Start()
     {
         inventoryPanel.SetActive(false);
-    }
-
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.E))
-        //{
-        //    ToggleInventoryUI();
-        //}
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonDown(2))
-        {
-            dragSingle = true;
-        }
-        else
-        {
-            dragSingle = false;
-        }
-    }
-
-    public void ToggleInventoryUI()
-    {
-        if (inventoryPanel != null)
-        {
-            if (!inventoryPanel.activeSelf)
-            {
-                inventoryPanel.SetActive(true);
-                RefreshInventoryUI("Backpack");
-            }
-            else
-            {
-                inventoryPanel.SetActive(false);
-            }
-        }
-    }
-
-    public void RefreshInventoryUI(string inventoryName)
-    {
-        if (inventoryUIByName.ContainsKey(inventoryName))
-        {
-            inventoryUIByName[inventoryName].Refresh();
-        }
-    }
-
-    public void RefreshAll()
-    {
-        foreach (KeyValuePair<string, Inventory_UI> keyValuePair in inventoryUIByName)
-        {
-            keyValuePair.Value.Refresh();
-        }
     }
 
     public Inventory_UI GetInventory_UI(string inventoryName)
