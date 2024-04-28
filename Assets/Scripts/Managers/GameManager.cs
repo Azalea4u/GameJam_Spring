@@ -31,4 +31,14 @@ public class GameManager : MonoBehaviour
 
         player = FindAnyObjectByType<Player>();
     }
+
+    private void Update()
+    {
+        if (timeManager.timestamp.hour == 23)
+        {
+            if (tileManager.seededTiles.Count > 0)
+                tileManager.UpdateSeededTiles();
+            tileManager.ResetWateredTiles();
+        }
+    }
 }

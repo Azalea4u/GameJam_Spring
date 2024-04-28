@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4900854915931823130}
   - component: {fileID: 1953205915372367204}
   m_Layer: 0
-  m_Name: WheatSeeds_Collectable
+  m_Name: TomateSeeds_Collectable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1000
-  m_Sprite: {fileID: 810662808, guid: 2bf3970fdb8a3804f9dd20db59f69085, type: 3}
+  m_Sprite: {fileID: -1392123366, guid: 2bf3970fdb8a3804f9dd20db59f69085, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

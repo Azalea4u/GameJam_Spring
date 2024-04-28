@@ -6,8 +6,6 @@ using UnityEngine.Tilemaps;
 [System.Serializable]
 public class GameTimestamp : MonoBehaviour
 {
-    public TileManager tileManager;
-
     public TMPro.TextMeshProUGUI dateText;
 
     public int hour = 1;
@@ -68,13 +66,6 @@ public class GameTimestamp : MonoBehaviour
         }
 
         date = "Year " + year + "\nMonth " + month + " | Day " + day;
-
-        // if hour == 24, reset all watered tiles
-        if (hour == 23)
-        {
-            // replace all watered tiles with normal tiles
-            tileManager.ResetWateredTiles();
-        }
     }
 
     // Concert Days to Hours

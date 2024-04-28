@@ -8,9 +8,9 @@ public class InventoryManager : MonoBehaviour
 
     public Inventory_UI inventoryUI;
 
-    [Header("Backpack")]
-    public int backpackSlotCount = 21;
-    public Inventory backpack;
+    //[Header("Backpack")]
+    //public int backpackSlotCount = 21;
+    //public Inventory backpack;
 
     [Header("Hotbar")]
     public int hotbarSlotCount = 7;
@@ -18,10 +18,10 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
-        backpack = new Inventory(backpackSlotCount);
-        hotbar = new Inventory(hotbarSlotCount);
+        //backpack = new Inventory(backpackSlotCount);
+        //inventoryByName.Add("Backpack", backpack);
 
-        inventoryByName.Add("Backpack", backpack);
+        hotbar = new Inventory(hotbarSlotCount);
         inventoryByName.Add("Hotbar", hotbar);
     }
 

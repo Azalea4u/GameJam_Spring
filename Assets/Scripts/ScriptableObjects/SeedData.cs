@@ -7,7 +7,34 @@ using UnityEngine.Tilemaps;
 public class SeedData : ItemData
 {
     [SerializeField] public int daysToGrow;
-    [SerializeField] public ItemData cropToYield;
+    [SerializeField] public Item cropToYield;
     [SerializeField] public Tile seedlingSprite;
     [SerializeField] public int yieldAmount;
-    [SerializeField] public int sellPrice;}
+    [SerializeField] public List<Tile> growthStageTiles = new List<Tile>();
+    [SerializeField] public bool IsHarvestable;
+    [SerializeField]
+    public enum GrowthStage
+    {
+        SEEDLING,
+        SPROUT,
+        GROWTH,
+        HARVESTABLE
+    }
+    [SerializeField] public GrowthStage eState;
+
+    public void PlantSeed(Vector3Int tilePosition, Tilemap interactableMap)
+    {
+        interactableMap.SetTile(tilePosition, seedlingSprite);
+        IsHarvestable = false;
+    }
+
+    public void Grow()
+    {
+        if (daysToGrow > 0)
+        {
+            daysToGrow--;
+            Debug.Log("Days left: " + daysToGrow); 
+        }
+
+    }
+}

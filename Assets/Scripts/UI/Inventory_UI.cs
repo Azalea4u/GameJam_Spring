@@ -1,17 +1,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory_UI : MonoBehaviour
 {
+    public Dictionary<string, Inventory_UI> inventoryUIByName = new Dictionary<string, Inventory_UI>();
+
     public string inventoryName;
+    [SerializeField] List<Inventory_UI> inventoryUIs;
     [SerializeField] List<Slot_UI> slots = new List<Slot_UI>();
     [SerializeField] private Canvas canvas;
+    [SerializeField] GameObject inventoryPanel;
 
-    private Inventory inventory;
+    public static Slot_UI draggedSlot;
+    public static Image draggedIcon;
+    public static bool dragSingle;
+
+    private Inventory inventory; 
 
     private void Awake()
     {
+        Initialize();
         canvas = FindObjectOfType<Canvas>();
     }
 
@@ -20,6 +30,19 @@ public class Inventory_UI : MonoBehaviour
         inventory = GameManager.instance.player.inventoryManager.GetInventoryByName(inventoryName);
         SetupSlots();
         Refresh();
+    }
+
+    public void ToggleInvenotory()
+    {
+        // check if the inventory is active
+        if (inventoryPanel.activeSelf)
+        {
+            inventoryPanel.SetActive(false);
+        }
+        else
+        {
+            inventoryPanel.SetActive(true);
+        }
     }
 
     public void Refresh()
@@ -42,7 +65,6 @@ public class Inventory_UI : MonoBehaviour
         }
     }
 
-    /*
     public void Remove()
     {
         Item itemToDrop = GameManager.instance.itemManager.GetItemByName(
@@ -66,7 +88,6 @@ public class Inventory_UI : MonoBehaviour
 
         UI_Manager.draggedSlot = null;
     }
-    */
 
     public void Slot_BeginDrag(Slot_UI slot)
     {
@@ -129,6 +150,17 @@ public class Inventory_UI : MonoBehaviour
             slot.slotID = counter;
             counter++;
             slot.inventory = inventory;
+        }
+    }
+
+    private void Initialize()
+    {
+        foreach (Inventory_UI ui in inventoryUIs)
+        {
+            if (inventoryUIByName.ContainsKey(ui.inventoryName))
+            {
+                inventoryUIByName.Add(ui.inventoryName, ui);
+            }
         }
     }
 }

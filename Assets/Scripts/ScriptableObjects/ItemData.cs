@@ -7,5 +7,6 @@ public class ItemData : ScriptableObject
 {
     [SerializeField] public string itemName = "Item Name";
     [SerializeField] public Sprite icon;
+    [SerializeField] public int sellPrice;
 
 }

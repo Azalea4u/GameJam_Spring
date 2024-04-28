@@ -27,10 +27,10 @@ public class UI_Manager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.E))
-        {
-            ToggleInventoryUI();
-        }
+        //if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.E))
+        //{
+        //    ToggleInventoryUI();
+        //}
 
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonDown(2))
         {

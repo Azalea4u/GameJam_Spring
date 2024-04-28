@@ -5,19 +5,18 @@ using UnityEngine.Tilemaps;
 
 public class TileManager : MonoBehaviour
 {
+    [Header("Tilemaps")]
     [SerializeField] public Tilemap interactableMap;
     [SerializeField] public Tilemap backgroundMap;
-    [SerializeField] public Tile hiddenInteractableTile;
+
+    [Header("Tiles")]
+    [SerializeField] public Tile interactableTile;
     [SerializeField] public Tile dirtTile;
     [SerializeField] public Tile plowedTile;
     [SerializeField] public Tile wateredTile;
+    [SerializeField] public Tile seededTile;
 
-    [Header("Growth Stages")]
-    [SerializeField] public List<Tile> growthStageTiles = new List<Tile>();
-    
-    private int daysGrown = 0;
-
-    public bool IsHarvestable { get; private set; }
+    public Dictionary<Vector3Int, SeedData> seededTiles = new Dictionary<Vector3Int, SeedData>();
 
     void Start()
     {
@@ -27,7 +26,7 @@ public class TileManager : MonoBehaviour
 
             if (tile != null && tile.name == "Interactable")
             {
-                interactableMap.SetTile(position, hiddenInteractableTile);
+                interactableMap.SetTile(position, interactableTile);
             }
         }
     }
@@ -42,9 +41,21 @@ public class TileManager : MonoBehaviour
         backgroundMap.SetTile(position, wateredTile);
     }
 
+    public void SetSeeded(Vector3Int position)
+    {
+        interactableMap.SetTile(position, seededTile);
+
+    }
     public void PlantSeed(Vector3Int position, SeedData seedData)
     {
         interactableMap.SetTile(position, seedData.seedlingSprite);
+        seededTiles.Add(position, seedData);
+
+        seedData.daysToGrow = 4;
+        seedData.eState = SeedData.GrowthStage.SEEDLING;
+        seedData.IsHarvestable = false;
+
+        //seededTiles[position] = seedData;
     }
 
     public string GetTileName(Vector3Int position)
@@ -74,14 +85,41 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    public void Grow()
+    public void UpdateSeededTiles()
     {
-        daysGrown++;
-        Debug.Log("Days Grown: " + daysGrown);
-    }
+        List<Vector3Int> tilesToRemove = new List<Vector3Int>();
 
-    public void GetAllPlantedTiles()
-    {
-        
+        foreach (var entry in seededTiles)
+        {
+            int daysLeft = entry.Value.daysToGrow;
+
+            Vector3Int position = entry.Key;
+            SeedData seedData = entry.Value;
+
+            // Check if the tile has been watered
+            if (backgroundMap.GetTile(position) == wateredTile)
+            {
+                // If watered, increment the growth stage
+                if (seedData.eState < SeedData.GrowthStage.HARVESTABLE)
+                {
+                    seedData.eState++;
+                    interactableMap.SetTile(position, seedData.growthStageTiles[(int)seedData.eState]);
+                    if (seedData.eState == SeedData.GrowthStage.HARVESTABLE)
+                    {
+                        seedData.IsHarvestable = true;
+                    }
+                }
+            }
+            else
+            {
+                // If not watered, add one day to the days to grow
+                seedData.daysToGrow = Mathf.Min(seedData.daysToGrow + 1, seedData.daysToGrow);
+            }
+        }
+
+        foreach (var position in tilesToRemove)
+        {
+            seededTiles.Remove(position);
+        }
     }
 }

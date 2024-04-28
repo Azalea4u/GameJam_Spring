@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,14 @@ using UnityEngine.Tilemaps;
 
 public class TimeManager : MonoBehaviour
 {
-    public TimeManager Instance { get; private set; }
+    public static TimeManager Instance { get; private set; }
 
     [Header("Internal Clock")]
     [SerializeField] public GameTimestamp timestamp;
     [SerializeField] public float timeScale = 1.0f;
+
+    [Header("TimerBar")]
+    [SerializeField] private TimerController timerController;
 
     private void Awake()
     {
@@ -42,5 +46,12 @@ public class TimeManager : MonoBehaviour
     private void Tick()
     {
         timestamp.UpdateClock();
+        UpdateTimerBar();
+    }
+
+    private void UpdateTimerBar()
+    {
+        float fillAmount = 1f - (timestamp.hour - 1 + (float)DateTime.Now.Second / 60f) / 24f;
+        timerController.UpdateTimerBar(fillAmount);
     }
 }

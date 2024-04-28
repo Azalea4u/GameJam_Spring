@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
     public InventoryManager inventoryManager;
     private TileManager tileManager;
-    private CropBehavior cropBehavior;
 
     private void Awake()
     {
@@ -29,23 +29,41 @@ public class Player : MonoBehaviour
 
                 if (!string.IsNullOrWhiteSpace(tileName))
                 {
+                    if (tileManager.seededTiles.ContainsKey(position))
+                    {
+                        SeedData seedData = tileManager.seededTiles[position];
+                        if (seedData.IsHarvestable)
+                        {
+                            // Harvest the crop
+                            Item cropToYield = seedData.cropToYield;
+                            int yieldAmount = seedData.yieldAmount;
+
+                            // Add the harvested crop to the inventory
+                            for (int i = 0; i < yieldAmount; i++)
+                            {
+                                inventoryManager.Add("Hotbar", cropToYield);
+                            }
+
+                            // Remove the seeded tile from the dictionary and set the tile back to dirt
+                            tileManager.seededTiles.Remove(position);
+                            tileManager.interactableMap.SetTile(position, tileManager.interactableTile);
+
+                            Debug.Log("Harvested " + yieldAmount + " " + cropToYield.name);
+                        }
+                    }
+
                     if (tileName.Contains("Interactable"))
                     {
-                        if (inventoryManager.hotbar.selectedSlot.itemName == "Hoe" || inventoryManager.hotbar.selectedSlot.itemName == "WateringCan")
+
+                        
+                        if (inventoryManager.hotbar.selectedSlot.itemName == "Hoe")
                         {
-                            switch (inventoryManager.hotbar.selectedSlot.itemName)
-                            {
-                                case "Hoe":
-                                    tileManager.SetPlowed(position);
-                                    break;
 
-                                case "WateringCan":
-                                    tileManager.SetWatered(position);
-                                    break;
-
-                                default:
-                                    break;
-                            }
+                            tileManager.SetPlowed(position);
+                        }
+                        else if (inventoryManager.hotbar.selectedSlot.itemName == "WateringCan")
+                        {
+                            tileManager.SetWatered(position);
                         }
                         else if (inventoryManager.hotbar.selectedSlot.itemName.Contains("Seed"))
                         {
@@ -54,7 +72,9 @@ public class Player : MonoBehaviour
                             {
                                 if (tileName.Contains("Plow"))
                                 {
+                                    //tileManager.SetSeeded(position);
                                     tileManager.PlantSeed(position, inventoryManager.hotbar.selectedSlot.seedData);
+
                                     //cropBehavior.PlantSeed(position, inventoryManager.hotbar.selectedSlot.seedData);
 
                                     inventoryManager.hotbar.selectedSlot.count--;
@@ -71,10 +91,6 @@ public class Player : MonoBehaviour
                             }
 
                             inventoryManager.inventoryUI.Refresh();
-                        }
-                        else
-                        {
-                            Debug.Log("Cannot interact with tile");
                         }
                     }
                 }
@@ -100,6 +116,4 @@ public class Player : MonoBehaviour
             DropItem(item);
         }
     }
-
-
 }

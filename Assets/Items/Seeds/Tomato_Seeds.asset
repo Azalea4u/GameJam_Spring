@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0c5123f209482747ac176dacc95f925, type: 3}
-  m_Name: Wheat_Seeds
+  m_Name: Tomato_Seeds
   m_EditorClassIdentifier: 
-  itemName: Wheat Seeds
-  icon: {fileID: 810662808, guid: 2bf3970fdb8a3804f9dd20db59f69085, type: 3}
+  itemName: Tomato Seeds
+  icon: {fileID: -1392123366, guid: 2bf3970fdb8a3804f9dd20db59f69085, type: 3}
   daysToGrow: 4
   cropToYield: {fileID: 1367110483493695050, guid: b827fe079ee22764c9dde939320b1be2, type: 3}
-  seedlingSprite: {fileID: 11400000, guid: 4b9453a616750bb40a0578d6ff95f3ed, type: 2}
-  yieldAmount: 3
-  sellPrice: 10
+  seedlingSprite: {fileID: 11400000, guid: 1e7514cf9257c454e9445ef5b6c37c83, type: 2}
+  yieldAmount: 2
+  sellPrice: 15
   growthStageTiles:
-  - {fileID: 11400000, guid: 4b9453a616750bb40a0578d6ff95f3ed, type: 2}
-  - {fileID: 11400000, guid: f141acf8c1911124495fe67476ed3b4a, type: 2}
-  - {fileID: 11400000, guid: 4ed7590166652314cb53e0c86f99385c, type: 2}
-  - {fileID: 11400000, guid: aa5a2c4078e63da42bba9c472d70338d, type: 2}
+  - {fileID: 11400000, guid: 1e7514cf9257c454e9445ef5b6c37c83, type: 2}
+  - {fileID: 11400000, guid: 330adfdd6fc3c5b4f90546ce6b6f5f7f, type: 2}
+  - {fileID: 11400000, guid: 573a2bc4e769775428a146ac807e26b4, type: 2}
+  - {fileID: 11400000, guid: 9802de9cd3d42dc4a8e42770d1577785, type: 2}
   IsHarvestable: 0
   eState: 0
