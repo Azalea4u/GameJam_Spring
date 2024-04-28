@@ -12,6 +12,13 @@ public class TileManager : MonoBehaviour
     [SerializeField] public Tile plowedTile;
     [SerializeField] public Tile wateredTile;
 
+    [Header("Growth Stages")]
+    [SerializeField] public List<Tile> growthStageTiles = new List<Tile>();
+    
+    private int daysGrown = 0;
+
+    public bool IsHarvestable { get; private set; }
+
     void Start()
     {
         foreach (var position in interactableMap.cellBounds.allPositionsWithin)
@@ -37,9 +44,7 @@ public class TileManager : MonoBehaviour
 
     public void PlantSeed(Vector3Int position, SeedData seedData)
     {
-        // get tile from data
-        TileBase seedTile = seedData.seedlingSprite;
-        interactableMap.SetTile(position, seedTile);
+        interactableMap.SetTile(position, seedData.seedlingSprite);
     }
 
     public string GetTileName(Vector3Int position)
@@ -67,5 +72,16 @@ public class TileManager : MonoBehaviour
                 backgroundMap.SetTile(position, dirtTile);
             }
         }
+    }
+
+    public void Grow()
+    {
+        daysGrown++;
+        Debug.Log("Days Grown: " + daysGrown);
+    }
+
+    public void GetAllPlantedTiles()
+    {
+        
     }
 }

@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public InventoryManager inventoryManager;
     private TileManager tileManager;
+    private CropBehavior cropBehavior;
 
     private void Awake()
     {
@@ -24,7 +25,6 @@ public class Player : MonoBehaviour
             if (tileManager != null)
             {
                 Vector3Int position = new Vector3Int((int)transform.position.x, (int)transform.position.y - 1, 0);
-
                 string tileName = tileManager.GetTileName(position);
 
                 if (!string.IsNullOrWhiteSpace(tileName))
@@ -50,14 +50,27 @@ public class Player : MonoBehaviour
                         else if (inventoryManager.hotbar.selectedSlot.itemName.Contains("Seed"))
                         {
                             // get seed data from selected slot
-                            SeedData seedData = inventoryManager.hotbar.selectedSlot.seedData;
+                            if (inventoryManager.hotbar.selectedSlot.count > 0)
+                            {
+                                if (tileName.Contains("Plow"))
+                                {
+                                    tileManager.PlantSeed(position, inventoryManager.hotbar.selectedSlot.seedData);
+                                    //cropBehavior.PlantSeed(position, inventoryManager.hotbar.selectedSlot.seedData);
 
-                            if (tileName.Contains("Plow"))
-                                tileManager.PlantSeed(position, seedData);
+                                    inventoryManager.hotbar.selectedSlot.count--;
+                                    
+                                    Debug.Log("Planted Seed");
+                                }
+                                else
+                                    Debug.Log("This tile has not been plowed up");
+
+                            }
                             else
-                                Debug.Log("This tile has not been plowed up");
+                            {
+                                Debug.Log("You don't have any seeds to plant!");
+                            }
 
-                            Debug.Log("Planted Seed");
+                            inventoryManager.inventoryUI.Refresh();
                         }
                         else
                         {
@@ -87,4 +100,6 @@ public class Player : MonoBehaviour
             DropItem(item);
         }
     }
+
+
 }

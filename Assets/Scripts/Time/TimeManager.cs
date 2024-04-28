@@ -8,9 +8,8 @@ public class TimeManager : MonoBehaviour
     public TimeManager Instance { get; private set; }
 
     [Header("Internal Clock")]
-    [SerializeField] GameTimestamp timestamp;
-    [SerializeField] public float timeScale = 1.0f;   
-    
+    [SerializeField] public GameTimestamp timestamp;
+    [SerializeField] public float timeScale = 1.0f;
 
     private void Awake()
     {

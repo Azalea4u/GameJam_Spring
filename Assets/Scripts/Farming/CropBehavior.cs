@@ -4,36 +4,43 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+
+
 public class CropBehavior : MonoBehaviour
 {
     TileManager tileManager;
+    TimeManager timeManager;
     Item crop;
 
     private SeedData seedData;
     private Vector3Int tilePosition;
-    private int daysGrown;
+    private int daysGrown = 0;
 
     public bool IsHarvestable { get; private set; }
 
     [Header("Growth Stages")]
-    [SerializeField] public List<TileBase> growthStageTiles = new List<TileBase>();
-    [SerializeField] TileBase seedlingTile;
-    [SerializeField] TileBase sproutTile;
-    [SerializeField] TileBase growthTile;
-    [SerializeField] TileBase harvestableTile;
+    [SerializeField] public List<Tile> growthStageTiles = new List<Tile>();
 
-    public enum CropState
+    private void Update()
     {
-        SEEDLING,
-        SPROUT,
-        GROWTH,
-        HARVESTABLE
+        if (GameManager.instance.timeManager.timestamp.hour == 23)
+            Grow();
     }
-    public CropState eState;
 
-    public void Plant(SeedData seedToGrow, Tilemap interactableMap, Vector3Int tilePosition)
+    public void PlantSeed(Vector3Int tilePosition, SeedData seedData)
     {
-        this.seedData = seedToGrow;
+        //this.seedData = seedData;
+        //this.tileManager.interactableMap = interactableMap;
+        //this.tilePosition = tilePosition;
+        //tileManager.interactableMap.SetTile(tilePosition, seedData.seedlingSprite);
+        //tileManager.PlantSeed(tilePosition, seedData);
+        this.daysGrown = 0;
+
+    }
+
+    public void Plant(Vector3Int tilePosition, Tilemap interactableMap)
+    {
+
         this.tileManager.interactableMap = interactableMap;
         this.tilePosition = tilePosition;
         this.daysGrown = 0;
@@ -44,8 +51,11 @@ public class CropBehavior : MonoBehaviour
     public void Grow()
     {
         daysGrown++;
+        Debug.Log(daysGrown);
 
-        int growthStageIndex = Mathf.CeilToInt((float)daysGrown / ((float)seedData.daysToGrow / growthStageTiles.Count));
+        // if days 
+        int growthStageIndex = Mathf.CeilToInt((int)daysGrown / ((int)seedData.daysToGrow / growthStageTiles.Count));
+
         TileBase tileToSet = GetTileForGrowthStage(growthStageIndex);
 
         tileManager.interactableMap.SetTile(tilePosition, tileToSet);
@@ -58,19 +68,8 @@ public class CropBehavior : MonoBehaviour
 
     private TileBase GetTileForGrowthStage(int stage)
     {
-        switch (stage)
-        {
-            case 1:
-                return seedlingTile;
-            case 2:
-                return sproutTile;
-            case 3:
-                return growthTile;
-            case 4:
-                return harvestableTile;
-            default:
-                return null;
-        }
+        Debug.Log("stage: " + stage + "growthStageTile: " + growthStageTiles[stage].name);
+        return growthStageTiles[stage];
     }
 
     public void Harvest()

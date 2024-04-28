@@ -7,12 +7,15 @@ using UnityEngine.Tilemaps;
 public class GameTimestamp : MonoBehaviour
 {
     public TileManager tileManager;
+
     public TMPro.TextMeshProUGUI dateText;
 
     public int hour = 1;
     public int day = 1;
     public int month = 1;
     public int year = 0;
+
+    public int daysGrown = 0;
 
     public GameTimestamp(int hour, int day, int month, int year)
     {
@@ -39,8 +42,6 @@ public class GameTimestamp : MonoBehaviour
         set
         {
             dateText.text = value;
-            Debug.Log(value);
-            Debug.Log("Hour " + hour);
         }
     }
 
