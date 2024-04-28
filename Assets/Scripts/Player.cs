@@ -8,6 +8,12 @@ public class Player : MonoBehaviour
     public InventoryManager inventoryManager;
     private TileManager tileManager;
 
+    [Header("Audio")]
+    public AudioSource music;
+    public AudioSource collect;
+    public AudioSource water;
+    public AudioSource plow;
+    public AudioSource plant;
 
     private void Awake()
     {
@@ -44,6 +50,7 @@ public class Player : MonoBehaviour
                             for (int i = 0; i < yieldAmount; i++)
                             {
                                 inventoryManager.Add("Hotbar", cropToYield);
+                                collect.Play();
                             }
 
                             // Remove the seeded tile from the dictionary and set the tile back to dirt
@@ -65,11 +72,15 @@ public class Player : MonoBehaviour
                                 Debug.Log("This tile has already been plowed up");
                             }
                             else
+                            {
                                 tileManager.SetPlowed(position);
+                                plow.Play();
+                            }
                         }
                         else if (inventoryManager.hotbar.selectedSlot.itemName == "WateringCan")
                         {
                             tileManager.SetWatered(position);
+                            water.Play();
                         }
                         else if (inventoryManager.hotbar.selectedSlot.itemName.Contains("Seed"))
                         {
@@ -82,7 +93,7 @@ public class Player : MonoBehaviour
                                     tileManager.PlantSeed(position, inventoryManager.hotbar.selectedSlot.seedData);
 
                                     //cropBehavior.PlantSeed(position, inventoryManager.hotbar.selectedSlot.seedData);
-
+                                    plant.Play();
                                     inventoryManager.hotbar.selectedSlot.count--;
                                     
                                     Debug.Log("Planted Seed");
