@@ -22,6 +22,8 @@ public class SeedData : ItemData
     }
     [SerializeField] public GrowthStage eState;
 
+    public SeedData() { }
+
     public void PlantSeed(Vector3Int tilePosition, Tilemap interactableMap)
     {
         interactableMap.SetTile(tilePosition, seedlingSprite);
