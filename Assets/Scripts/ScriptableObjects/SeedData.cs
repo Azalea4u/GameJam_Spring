@@ -37,6 +37,5 @@ public class SeedData : ItemData
             daysToGrow--;
             Debug.Log("Days left: " + daysToGrow); 
         }
-
     }
 }
